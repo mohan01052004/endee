@@ -83,7 +83,7 @@ class EndeeClient:
                     error_data = response.json()
                     if 'error' in error_data:
                         error_msg = error_data['error']
-                except:
+                except Exception:
                     error_msg = response.text or error_msg
                 
                 raise EndeeAPIError(
