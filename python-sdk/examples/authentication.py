@@ -2,6 +2,7 @@
 Example showing how to use authentication and handle errors.
 """
 
+import os
 from endee_client import EndeeClient, EndeeAPIError, EndeeConnectionError
 
 def main():
@@ -19,14 +20,19 @@ def main():
     # Example 2: Connection with authentication
     print("\n2. Connecting with authentication...")
     try:
-        # If your server has NDD_AUTH_TOKEN set, provide it here
-        auth_token = "your_auth_token_here"  # Replace with actual token
-        client = EndeeClient(
-            base_url="http://localhost:8080",
-            auth_token=auth_token
-        )
-        health = client.health_check()
-        print(f"   Success: {health}")
+        # Get token from environment variable (recommended)
+        # Set it with: export ENDEE_AUTH_TOKEN=your_token_here
+        auth_token = os.getenv('ENDEE_AUTH_TOKEN')
+        if not auth_token:
+            print("   Skipping: ENDEE_AUTH_TOKEN not set")
+            print("   Set it with: export ENDEE_AUTH_TOKEN=your_token")
+        else:
+            client = EndeeClient(
+                base_url="http://localhost:8080",
+                auth_token=auth_token
+            )
+            health = client.health_check()
+            print(f"   Success: {health}")
     except EndeeAPIError as e:
         print(f"   Authentication error: {e}")
         if e.status_code == 401:

@@ -83,7 +83,9 @@ class EndeeClient:
                     error_data = response.json()
                     if 'error' in error_data:
                         error_msg = error_data['error']
-                except Exception:
+                except (ValueError, KeyError):
+                    # response.json() can raise ValueError if not valid JSON
+                    # KeyError if 'error' key doesn't exist (though we check with 'has')
                     error_msg = response.text or error_msg
                 
                 raise EndeeAPIError(
