@@ -23,3 +23,15 @@ frontend/*
 
 # DS Store
 .DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+.pytest_cache/
+.coverage
+htmlcov/

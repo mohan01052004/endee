@@ -2,6 +2,12 @@
 
 **Endee (nD)** is a specialized, high-performance vector database built for speed and efficiency. This guide covers supported platforms, dependency requirements, and detailed build instructions using both our automated installer and manual CMake configuration.
 
+## Python SDK
+
+Looking to use Endee from Python? Check out our [Python SDK Quick Start Guide](python-sdk/README.md) for easy integration with your Python applications.
+
+## Installation Options
+
 there are 3 ways to build and run endee:
 1. quick installation and run using install.sh and run.sh scripts
 2. manual build using cmake
@@ -335,6 +341,37 @@ docker compose up -d
 ```
 
 for more details visit [docs.endee.io](https://docs.endee.io/quick-start)
+
+---
+
+## Client Libraries and SDKs
+
+### Python SDK
+
+We provide an official Python SDK for easy integration with Python applications. The SDK supports all Endee features including:
+
+* Vector index creation and management
+* Vector insertion and search operations
+* Metadata filtering
+* Hybrid search (dense + sparse vectors)
+* Backup and restore operations
+* Authentication support
+
+**Quick Start:**
+
+```bash
+# Install the SDK
+cd python-sdk
+pip install -e .
+
+# Use in your code
+from endee_client import EndeeClient
+
+client = EndeeClient("http://localhost:8080")
+client.create_index("my_index", dim=128, space_type="cosine")
+```
+
+**Full documentation:** See the [Python SDK Quick Start Guide](python-sdk/README.md)
 
 ---
 
